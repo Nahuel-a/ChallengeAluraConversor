@@ -171,36 +171,27 @@ public class Temperaturas extends javax.swing.JPanel {
     }
     private void convertirTemperatura() {
         switch(de){
-            case "°C - Celsius":
-                if(a.equals("°F - Fahrenheit")){
-                    temperatura = ((9*valor)/5)+32;
-                    
-                }else if(a.equals("K - Kelvin")){
-                    temperatura = valor + 273.15;
-                }else{
-                    temperatura = valor;
-                }
-                break;
-            case "°F - Fahrenheit":
-                if(a.equals("°C - Celsius")){
-                    temperatura = (5*(valor-32))/9;
-                    
-                }else if(a.equals("K - Kelvin")){
-                    temperatura = ((5*(valor-32))/9)+273.15;
-                }else{
-                    temperatura = valor;
-                }
-                break;
-            case "K - Kelvin":
-                if(a.equals("°F - Fahrenheit")){
-                    temperatura = ((9*(valor-273.15))/5)+32;
-                    
-                }else if(a.equals("°C - Celsius")){
-                    temperatura = valor - 273.15;
-                }else{
-                    temperatura = valor;
-                }
-                break;  
+            case "°C - Celsius" -> {
+                temperatura = switch (a) {
+                case "°F - Fahrenheit" -> ((9*valor)/5)+32;
+                case "K - Kelvin" -> valor + 273.15;
+                default -> valor;
+            };
+            }
+            case "°F - Fahrenheit" -> {
+                temperatura = switch (a) {
+                case "°C - Celsius" -> (5*(valor-32))/9;
+                case "K - Kelvin" -> ((5*(valor-32))/9)+273.15;
+                default -> valor;
+            };
+            }
+            case "K - Kelvin" -> {
+                temperatura = switch (a) {
+                case "°F - Fahrenheit" -> ((9*(valor-273.15))/5)+32;
+                case "°C - Celsius" -> valor - 273.15;
+                default -> valor;
+            };
+            }  
         }
         
         lblResultado.setText(valor +" "+ de +" -> "+ redondear(temperatura) +" "+ a.substring(0, 2));

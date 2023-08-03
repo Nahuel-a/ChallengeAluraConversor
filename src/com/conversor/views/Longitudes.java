@@ -218,6 +218,14 @@ public class Longitudes extends javax.swing.JPanel {
             }
             
             double valorIngresado = Double.parseDouble(txtLongitud.getText());
+            if (valorIngresado <= 0){
+                JOptionPane.showMessageDialog(null,
+                        "El valor ingresado no puede ser negativo",
+                        "Error",
+                        JOptionPane.INFORMATION_MESSAGE
+                        );
+                return;
+            }
             convertirLongitud(valorIngresado);
             
         }catch (NumberFormatException e){

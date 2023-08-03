@@ -171,10 +171,11 @@ public class Monedas extends javax.swing.JPanel {
         
         
         try{
-            //Se tratan 3 tipos de errores
+            //Se tratan 4 tipos de errores
             //1: Si no se ingreso texto
             //2: Si en algun ComboBox no fue seleccionada alguna opción
             //3: Si el valor ingresado no es un numero
+            //4: Si el valor ingresado es negativo
             if(monedaOrigen.getSelectedIndex() == 0 || monedaDestino.getSelectedIndex() == 0 || 
                     txtCantidad.getText().equals(""))
             {
@@ -185,8 +186,16 @@ public class Monedas extends javax.swing.JPanel {
                         );
                 return;
             }
-            
             double valorIngresado = Double.parseDouble(txtCantidad.getText());
+            if (valorIngresado <= 0){
+                JOptionPane.showMessageDialog(null,
+                        "El valor ingresado no puede ser negativo",
+                        "Error",
+                        JOptionPane.INFORMATION_MESSAGE
+                        );
+                return;
+            }
+            
             conversionMonedas(valorIngresado);
             
         }catch (NumberFormatException e){
